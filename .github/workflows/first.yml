@@ -5,16 +5,27 @@ jobs:
     name:  First Job
     runs-on: ubuntu-latest
     steps:
-    - name: Step one
-      uses: actions/checkout@v2
-    - name: Step two
-      run: env | sort
+    - name: Print date
+      run: date
     
   second-job:
     name: Second Job
     runs-on: windows-latest
     steps:
-    - name: Step one
-      uses: actions/checkout@v2
-    - name: Step two
-      run: "Get-ChildItem Env: | Sort-Object Name"
+    - name: Print date
+      run: "Get-Date"
+      
+  third-job:
+    name: Third Job
+    runs-on: macos-latest
+    steps:
+    - name: Print date
+      run: date
+
+  fourth-job:
+    name: Fourth Job
+    runs-on: ubuntu-latest
+    needs: [first-job, second-job, third-job]
+    steps:
+    - name: Print the date
+      run: date
